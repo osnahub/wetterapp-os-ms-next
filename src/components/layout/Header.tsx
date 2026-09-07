@@ -19,7 +19,7 @@ export function Header({
   return (
     <header className="site-header" role="banner">
       <div className="app simple-header">
-        <h1 className="app-title" id="app-title">
+        <div className="app-title" id="app-title">
           <Image
             className="app-mark"
             src="/app-icon-64x64.png"
@@ -29,7 +29,7 @@ export function Header({
             height={36}
           />
           <span>WetterApp</span>
-        </h1>
+        </div>
 
         <div className="header-controls">
           <LocationSwitcher

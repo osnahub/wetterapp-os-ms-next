@@ -95,9 +95,9 @@ export function ActivitySuitabilityCard({
         <span className="bento-subtitle-badge">{locationName}</span>
       </div>
 
-      <div className="activity-list">
+      <ul className="activity-list" role="list">
         {recommendations.map((item) => (
-          <div key={item.id} className="activity-item">
+          <li key={item.id} className="activity-item">
             <div className="activity-icon-box">
               <ActivityIcon type={item.iconType} />
             </div>
@@ -111,9 +111,9 @@ export function ActivitySuitabilityCard({
               </div>
               <p className="activity-sub">{item.subtitle}</p>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

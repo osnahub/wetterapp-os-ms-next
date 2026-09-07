@@ -8,14 +8,14 @@ interface TemperatureTrendChartProps {
   timeZone?: string;
 }
 
-function getDayLabel(dateStr: string, index: number, timeZone = 'Europe/Berlin'): string {
+function getDayLabel(dateStr: string, index: number, _timeZone?: string): string {
   if (index === 0) return 'Heute';
-  try {
-    const d = new Date(dateStr);
-    return new Intl.DateTimeFormat('de-DE', { weekday: 'short', timeZone }).format(d);
-  } catch {
-    return `Tag ${index + 1}`;
+  const ymd = /^(\d{4})-(\d{2})-(\d{2})/.exec(dateStr);
+  if (ymd) {
+    const d = new Date(Date.UTC(Number(ymd[1]), Number(ymd[2]) - 1, Number(ymd[3]), 12, 0, 0));
+    return new Intl.DateTimeFormat('de-DE', { weekday: 'short', timeZone: 'UTC' }).format(d);
   }
+  return `Tag ${index + 1}`;
 }
 
 function generateBezierPath(points: { x: number; y: number }[]): string {

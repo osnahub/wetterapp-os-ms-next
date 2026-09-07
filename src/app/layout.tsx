@@ -2,8 +2,12 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'WetterApp',
-  description: 'Mobile Wettervorhersage mit lokalem Offline-Cache.',
+  title: {
+    default: 'WetterApp – Osnabrück & Münster',
+    template: '%s | WetterApp',
+  },
+  description: 'Moderne Wettervorhersage und Unwetterwarnungen für Osnabrück und Münster mit verlässlichem Offline-Cache.',
+  applicationName: 'WetterApp',
   manifest: '/manifest.webmanifest',
   icons: {
     icon: [
@@ -17,6 +21,18 @@ export const metadata: Metadata = {
     capable: true,
     title: 'WetterApp',
     statusBarStyle: 'black-translucent',
+  },
+  openGraph: {
+    title: 'WetterApp – Osnabrück & Münster',
+    description: 'Moderne Wettervorhersage und Unwetterwarnungen für Osnabrück und Münster mit verlässlichem Offline-Cache.',
+    type: 'website',
+    locale: 'de_DE',
+    siteName: 'WetterApp',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'WetterApp – Osnabrück & Münster',
+    description: 'Moderne Wettervorhersage und Unwetterwarnungen für Osnabrück und Münster mit verlässlichem Offline-Cache.',
   },
 };
 

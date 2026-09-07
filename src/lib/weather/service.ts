@@ -145,10 +145,10 @@ export async function fetchWeatherData(location: WeatherLocation): Promise<Weath
 
   const aqiUrl = `https://air-quality-api.open-meteo.com/v1/air-quality?${aqiParams.toString()}`;
 
-  // Fetch weather and air quality concurrently with caching
+  // Fetch weather and air quality concurrently with caching and defensive timeouts
   const [weatherRes, aqiRes, warnings] = await Promise.all([
-    fetch(weatherUrl, { next: { revalidate: 300 } }),
-    fetch(aqiUrl, { next: { revalidate: 600 } }).catch(() => null),
+    fetch(weatherUrl, { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) }),
+    fetch(aqiUrl, { next: { revalidate: 600 }, signal: AbortSignal.timeout(8000) }).catch(() => null),
     fetchDwdWarnings(location),
   ]);
 
@@ -345,6 +345,7 @@ export async function fetchDwdWarnings(location: WeatherLocation): Promise<DwdWa
     const res = await fetch('https://wetter.kloentrup.de/dwd-warnings.json', {
       next: { revalidate: 300 },
       headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(5000),
     });
 
     if (!res.ok) return [];
