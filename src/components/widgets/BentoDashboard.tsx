@@ -7,6 +7,7 @@ import { BentoMetricsGrid } from './BentoMetricsGrid';
 import { TemperatureTrendChart } from './TemperatureTrendChart';
 import { ActivitySuitabilityCard } from './ActivitySuitabilityCard';
 import { getActivityRecommendations } from '@/lib/weather/activities';
+import { HourlyForecast } from '../forecast/HourlyForecast';
 import { WeatherWarningsCard } from '../warnings/WeatherWarningsCard';
 import { AirQualityCard } from '../weather/AirQualityCard';
 
@@ -40,6 +41,14 @@ export function BentoDashboard({
         onRefresh={onRefresh}
         isRefreshing={isRefreshing}
       />
+
+      {/* Hourly Forecast Strip */}
+      <div className="bento-hourly-section">
+        <HourlyForecast
+          hours={data.hourly}
+          timeZone={data.location.timezone}
+        />
+      </div>
 
       {/* Main Bento Grid: 2 Columns on Desktop */}
       <div className="bento-columns-grid">

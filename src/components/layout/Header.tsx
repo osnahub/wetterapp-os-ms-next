@@ -9,16 +9,12 @@ interface HeaderProps {
   locations: WeatherLocation[];
   activeLocation: WeatherLocation;
   onSelectLocation: (location: WeatherLocation) => void;
-  viewMode?: 'classic' | 'bento';
-  onToggleViewMode?: (mode: 'classic' | 'bento') => void;
 }
 
 export function Header({
   locations,
   activeLocation,
   onSelectLocation,
-  viewMode = 'bento',
-  onToggleViewMode,
 }: HeaderProps) {
   return (
     <header className="site-header" role="banner">
@@ -36,27 +32,6 @@ export function Header({
         </h1>
 
         <div className="header-controls">
-          {onToggleViewMode && (
-            <div className="view-mode-toggle" role="group" aria-label="Ansicht wählen">
-              <button
-                type="button"
-                className={`view-toggle-btn ${viewMode === 'classic' ? 'is-active' : ''}`}
-                onClick={() => onToggleViewMode('classic')}
-                aria-pressed={viewMode === 'classic'}
-              >
-                Klassisch
-              </button>
-              <button
-                type="button"
-                className={`view-toggle-btn ${viewMode === 'bento' ? 'is-active' : ''}`}
-                onClick={() => onToggleViewMode('bento')}
-                aria-pressed={viewMode === 'bento'}
-              >
-                Bento Modern
-              </button>
-            </div>
-          )}
-
           <LocationSwitcher
             locations={locations}
             activeLocation={activeLocation}

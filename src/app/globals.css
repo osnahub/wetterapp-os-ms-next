@@ -769,54 +769,6 @@ a:focus-visible,
   --warning-accent: #a855f7;
 }
 
-/* Detail Section Grid */
-.detail-section-grid {
-  gap: 14px;
-  display: grid;
-}
-
-.detail-section {
-  padding: 17px;
-}
-
-.section-main-value {
-  margin: 8px 0 14px;
-  font-size: clamp(1.9rem, 7vw, 2.55rem);
-  font-weight: 800;
-  line-height: 1;
-}
-
-.detail-pair-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 18px;
-  margin: 0;
-  display: grid;
-  padding: 0;
-}
-
-.detail-item {
-  border-top: 1px solid var(--divider);
-  min-width: 0;
-  padding: 10px 0;
-}
-
-.detail-item-wide {
-  grid-column: 1 / -1;
-}
-
-.detail-item dt {
-  color: var(--text-secondary);
-  font-size: 0.78rem;
-  font-weight: 620;
-}
-
-.detail-item dd {
-  overflow-wrap: anywhere;
-  margin: 4px 0 0;
-  font-size: 1rem;
-  font-weight: 720;
-}
-
 /* Forecast: Hourly */
 .forecast-card {
   overflow: hidden;
@@ -955,90 +907,6 @@ a:focus-visible,
   font-size: 0.95rem;
 }
 
-/* Daily List */
-.daily-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-}
-
-.day {
-  border-top: 1px solid var(--divider);
-  grid-template-columns: 72px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 10px 12px;
-  padding: 12px 6px;
-  display: grid;
-}
-
-.day:first-child {
-  border-top: 0;
-}
-
-.day.is-today {
-  border-radius: var(--radius-small);
-  background: var(--surface-subtle);
-  padding-inline: 10px;
-}
-
-.day-date {
-  gap: 3px;
-  display: grid;
-}
-
-.day-date time {
-  font-weight: 720;
-}
-
-.day-date span {
-  color: var(--accent-strong);
-  font-size: 0.72rem;
-  font-weight: 780;
-}
-
-.day-condition {
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  display: flex;
-}
-
-.day-condition span:last-child {
-  overflow-wrap: anywhere;
-}
-
-.day-icon {
-  flex: none;
-  width: 1.55em;
-  height: 1.55em;
-  font-size: 1.35rem;
-  line-height: 1;
-  display: inline-grid;
-}
-
-.day-temps {
-  white-space: nowrap;
-  align-items: baseline;
-  gap: 4px;
-  display: flex;
-}
-
-.day-temps strong {
-  font-weight: 790;
-}
-
-.day-temps span {
-  color: var(--text-secondary);
-}
-
-.day-meta {
-  color: var(--text-secondary);
-  grid-column: 2 / 4;
-  margin: -4px 0 0;
-  font-size: 0.84rem;
-}
-
 /* Notices & Skeleton */
 .notice,
 .inline-note,
@@ -1138,15 +1006,9 @@ a:focus-visible,
 }
 
 /* Tablet & Desktop Breakpoints */
-@media (width >= 760px) {
+@media (min-width: 768px) {
   .app {
-    width: min(100%, 900px);
-  }
-  .metrics {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-  .detail-section-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 820px);
   }
   .simple-header {
     justify-content: space-between;
@@ -1175,12 +1037,13 @@ a:focus-visible,
   }
 }
 
-@media (width >= 1120px) {
+@media (min-width: 1024px) {
   .app,
   .site-footer {
-    width: min(100%, 920px);
+    width: min(100%, 1040px);
   }
 }
+
 
 /* Small Smartphone Viewport */
 @media (width <= 420px) {
@@ -1252,19 +1115,9 @@ a:focus-visible,
     margin-bottom: 2px;
   }
   .header-controls {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-  }
-  .view-mode-toggle {
-    width: 100%;
-    max-width: 320px;
     display: flex;
-  }
-  .view-toggle-btn {
-    flex: 1;
-    text-align: center;
+    justify-content: center;
+    width: 100%;
   }
   .quick-location-card {
     width: 100%;
@@ -1282,40 +1135,6 @@ a:focus-visible,
 }
 
 
-
-
-.view-mode-toggle {
-  display: inline-flex;
-  background: var(--surface-chip);
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
-  padding: 3px;
-  gap: 2px;
-}
-
-.view-toggle-btn {
-  font-size: 0.78rem;
-  font-weight: 600;
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  padding: 4px 12px;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.view-toggle-btn:hover {
-  color: var(--text-primary);
-}
-
-.view-toggle-btn.is-active {
-  background: #2563eb;
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
-}
-
 /* ==========================================================================
    Bento Dashboard Layout
    ========================================================================== */
@@ -1324,32 +1143,93 @@ a:focus-visible,
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .bento-warnings-wrapper {
   margin-bottom: -4px;
 }
 
+.bento-hourly-section {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.bento-hourly-section .hourly-card {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 16px 18px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.bento-hourly-section .hourly-scroll-hint {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.bento-hourly-section .hourly {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.bento-hourly-section .hourly-card h2 {
+  margin: 0 0 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bento-hourly-section .hour {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.bento-hourly-section .hour:hover {
+  transform: translateY(-2px);
+  background: var(--surface-chip);
+}
+
 .bento-columns-grid {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 @media (min-width: 860px) {
   .bento-columns-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 20px;
     align-items: start;
+    width: 100%;
   }
 }
 
 .bento-left-column,
 .bento-right-column {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 /* ==========================================================================
@@ -2091,21 +1971,8 @@ a:focus-visible,
 }
 
 /* ==========================================================================
-   Responsive Refinements & Desktop Width
+   Mobile Responsive Refinements
    ========================================================================== */
-@media (min-width: 768px) {
-  .app,
-  .site-footer {
-    width: min(100%, 740px);
-  }
-}
-
-@media (min-width: 1024px) {
-  .app,
-  .site-footer {
-    width: min(100%, 980px);
-  }
-}
 
 @media (max-width: 440px) {
   .bento-metrics-grid {
