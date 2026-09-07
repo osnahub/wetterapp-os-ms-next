@@ -69,6 +69,7 @@ export interface CurrentWeather {
   sunrise: string | null;
   sunset: string | null;
   daylightDurationSeconds: number | null;
+  dewPointCelsius: number | null;
 }
 
 export interface HourlyForecastItem {
@@ -164,4 +165,15 @@ export interface WeatherData {
   daily: DailyForecastItem[];
   airQuality?: AirQualityData;
   warnings: DwdWarning[];
+}
+
+export type ActivityBadgeVariant = 'excellent' | 'good' | 'moderate' | 'poor' | 'none';
+
+export interface ActivityRecommendation {
+  id: string;
+  title: string;
+  subtitle: string;
+  badgeText: string;
+  badgeVariant: ActivityBadgeVariant;
+  iconType: 'landmark' | 'zoo' | 'lake' | 'museum' | 'umbrella';
 }

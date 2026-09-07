@@ -203,6 +203,7 @@ function normalizeWeatherData(
     sunrise: daily.sunrise?.[dayIdx] ?? null,
     sunset: daily.sunset?.[dayIdx] ?? null,
     daylightDurationSeconds: num(daily.daylight_duration?.[dayIdx]),
+    dewPointCelsius: num(hourly.dew_point_2m?.[hourIdx]),
   };
 
   // Next 48 hours forecast
@@ -370,5 +371,20 @@ export async function fetchDwdWarnings(location: WeatherLocation): Promise<DwdWa
 }
 
 export function getLocationById(id: string): WeatherLocation {
-  return DEFAULT_LOCATIONS.find((l) => l.id === id) ?? DEFAULT_LOCATIONS[0];
+  if (!id) return DEFAULT_LOCATIONS[0];
+  const query = id.toLowerCase().trim();
+  return (
+    DEFAULT_LOCATIONS.find((l) => {
+      const name = l.name.toLowerCase();
+      return (
+        l.id.toLowerCase() === query ||
+        l.externalId?.toLowerCase() === query ||
+        name === query ||
+        (query === 'muenster' && name.includes('münster')) ||
+        (query === 'münster' && name.includes('münster')) ||
+        (query === 'osnabrueck' && name.includes('osnabrück')) ||
+        (query === 'osnabrück' && name.includes('osnabrück'))
+      );
+    }) ?? DEFAULT_LOCATIONS[0]
+  );
 }

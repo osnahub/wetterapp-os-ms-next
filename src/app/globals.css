@@ -1230,3 +1230,939 @@ a:focus-visible,
     animation: none;
   }
 }
+
+/* ==========================================================================
+   Header Controls & View Mode Toggle
+   ========================================================================== */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 680px) {
+  .simple-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .simple-header h1 {
+    justify-content: center;
+    margin-bottom: 2px;
+  }
+  .header-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+  }
+  .view-mode-toggle {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+  }
+  .view-toggle-btn {
+    flex: 1;
+    text-align: center;
+  }
+  .quick-location-card {
+    width: 100%;
+    max-width: 320px;
+  }
+  .quick-location-list {
+    width: 100%;
+    display: flex;
+  }
+  .quick-location-chip {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+
+
+
+.view-mode-toggle {
+  display: inline-flex;
+  background: var(--surface-chip);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.view-toggle-btn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.view-toggle-btn:hover {
+  color: var(--text-primary);
+}
+
+.view-toggle-btn.is-active {
+  background: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+}
+
+/* ==========================================================================
+   Bento Dashboard Layout
+   ========================================================================== */
+.bento-dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.bento-warnings-wrapper {
+  margin-bottom: -4px;
+}
+
+.bento-columns-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 860px) {
+  .bento-columns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+}
+
+.bento-left-column,
+.bento-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ==========================================================================
+   Bento Top Bar & Radiant Hero Card
+   ========================================================================== */
+.bento-hero-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bento-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0 4px;
+}
+
+.bento-location-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bento-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.bento-pill-local {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.bento-pill-offline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.bento-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+}
+
+.bento-location-name {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 2px 0 0 0;
+  color: var(--text-primary);
+}
+
+.bento-time-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.bento-refresh-button {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-card);
+}
+
+.bento-refresh-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+
+.bento-refresh-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.bento-refresh-icon.is-spinning {
+  animation: spin 1s linear infinite;
+}
+
+.bento-hero-card {
+  background: radial-gradient(130% 100% at 90% 10%, rgba(96, 165, 250, 0.4) 0%, rgba(79, 70, 229, 0.25) 50%, rgba(15, 23, 42, 0.85) 100%), linear-gradient(145deg, #1e3a8a, #172554);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bento-hero-main {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.bento-hero-icon-box {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bento-hero-icon-box svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+.bento-hero-temp-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bento-hero-temp {
+  font-size: 3.8rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.bento-hero-condition {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.bento-hero-footer {
+  display: flex;
+  gap: 32px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.75rem;
+}
+
+.bento-hero-sublabel {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.bento-hero-subval {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Bento Cards & Modular Grid
+   ========================================================================== */
+.bento-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 500px) {
+  .bento-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.atmosphere-card {
+  grid-column: 1 / -1;
+}
+
+
+.bento-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+  min-width: 0;
+  overflow: hidden;
+}
+
+
+.bento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.bento-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.bento-subtitle-badge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.12);
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.bento-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-metric-large {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.bento-metric-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.bento-metric-status {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.bento-card-footnote {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 10px 0 0 0;
+  line-height: 1.35;
+}
+
+/* ==========================================================================
+   Progress Tracks (UV & Rain)
+   ========================================================================== */
+.bento-progress-track {
+  position: relative;
+  width: 100%;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--surface-subtle);
+  overflow: visible;
+  margin: 8px 0;
+}
+
+.uv-track {
+  background: linear-gradient(90deg, #4ade80 0%, #facc15 35%, #fb923c 65%, #f87171 85%, #c084fc 100%);
+}
+
+.bento-progress-pin {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #1e293b;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.rain-track {
+  background: rgba(59, 130, 246, 0.15);
+  overflow: hidden;
+}
+
+.bento-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #3b82f6);
+  border-radius: 9999px;
+}
+
+/* ==========================================================================
+   Wind & Compass Card
+   ========================================================================== */
+.bento-wind-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.bento-wind-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.bento-wind-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 4px 0 0 0;
+}
+
+.bento-compass-wrapper {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bento-compass-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.compass-label {
+  font-size: 10px;
+  font-weight: 700;
+  fill: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Sun Arc Card
+   ========================================================================== */
+.sun-arc-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sun-arc-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sun-arc-main-time {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+}
+
+.sun-arc-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.sun-arc-visual {
+  width: 78px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+
+.sun-arc-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sun-dot {
+  filter: drop-shadow(0 0 6px #ffd166);
+}
+
+/* ==========================================================================
+   Atmosphere Card
+   ========================================================================== */
+.atmosphere-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 16px;
+  margin-top: 4px;
+}
+
+@media (max-width: 540px) {
+  .atmosphere-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+.atmosphere-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.atmosphere-label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.atmosphere-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Trend Chart Card (SVG Bézier & Range Bars)
+   ========================================================================== */
+.trend-chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-max {
+  background: #fb923c;
+}
+
+.dot-min {
+  background: #38bdf8;
+}
+
+.trend-svg-container {
+  width: 100%;
+  height: 140px;
+  position: relative;
+  margin: 4px 0 8px 0;
+}
+
+.trend-chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.chart-point {
+  stroke: var(--surface-card);
+  stroke-width: 1.5;
+}
+
+.chart-temp-label {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.max-label {
+  fill: #fb923c;
+}
+
+.min-label {
+  fill: #38bdf8;
+}
+
+.chart-day-axis-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  fill: var(--text-secondary);
+}
+
+.trend-daily-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid var(--divider);
+  padding-top: 12px;
+}
+
+.trend-row {
+  display: grid;
+  grid-template-columns: 50px 75px 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 4px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+
+.trend-row:hover {
+  background: var(--surface-subtle);
+}
+
+.trend-row-day {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.trend-row-condition {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trend-row-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trend-row-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.trend-row-rain {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #38bdf8;
+  min-width: 44px;
+}
+
+.trend-drop-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.trend-range-bar-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trend-val-min {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94a3b8;
+  width: 28px;
+  text-align: right;
+}
+
+.trend-val-max {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  width: 28px;
+  text-align: left;
+}
+
+.trend-bar-track {
+  flex: 1;
+  height: 5px;
+  border-radius: 9999px;
+  background: var(--surface-subtle);
+  position: relative;
+  overflow: hidden;
+}
+
+.trend-bar-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #38bdf8 0%, #fb923c 100%);
+}
+
+/* ==========================================================================
+   Activity Suitability Card
+   ========================================================================== */
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  transition: transform 0.15s ease;
+}
+
+.activity-item:hover {
+  transform: translateY(-1px);
+}
+
+.activity-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.activity-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.activity-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activity-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.activity-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.badge-excellent {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.badge-good {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.badge-moderate {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.badge-poor {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.badge-none {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+  border-color: rgba(148, 163, 184, 0.3);
+}
+
+/* ==========================================================================
+   Responsive Refinements & Desktop Width
+   ========================================================================== */
+@media (min-width: 768px) {
+  .app,
+  .site-footer {
+    width: min(100%, 740px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .app,
+  .site-footer {
+    width: min(100%, 980px);
+  }
+}
+
+@media (max-width: 440px) {
+  .bento-metrics-grid {
+    gap: 10px;
+  }
+  .bento-card {
+    padding: 12px;
+    border-radius: 16px;
+  }
+  .bento-metric-large {
+    margin-bottom: 4px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .bento-metric-value {
+    font-size: 1.45rem;
+  }
+  .bento-metric-status {
+    font-size: 0.72rem;
+  }
+  .bento-card-footnote {
+    font-size: 0.7rem;
+    margin-top: 6px;
+  }
+  .bento-compass-wrapper {
+    width: 44px;
+    height: 44px;
+  }
+  .sun-arc-visual {
+    width: 66px;
+    height: 38px;
+  }
+  .sun-arc-main-time {
+    font-size: 1.3rem;
+  }
+  .sun-arc-sub {
+    font-size: 0.7rem;
+  }
+  .bento-hero-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+  .bento-hero-temp {
+    font-size: 3.2rem;
+  }
+  .bento-hero-icon-box {
+    width: 54px;
+    height: 54px;
+  }
+  .bento-hero-footer {
+    gap: 14px;
+  }
+  .trend-row {
+    grid-template-columns: 46px 60px 1fr;
+    gap: 6px;
+    padding: 5px 2px;
+  }
+}
+
+
