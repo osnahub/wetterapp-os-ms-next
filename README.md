@@ -36,8 +36,10 @@ src/
 ├── app/
 │   ├── api/
 │   │   └── weather/route.ts      # API Route Handler für Standortwechsel & Refresh
+│   ├── error.tsx                 # Fehler-Boundary mit Wiederholen-Aktion
 │   ├── globals.css               # Design-Tokens, Bento-Layout & responsive Breakpoints
 │   ├── layout.tsx                # App-Layout, PWA-Metadaten & Viewport
+│   ├── loading.tsx               # Skeleton-Streaming-Fallback
 │   └── page.tsx                  # Server Component mit ISR-Caching
 ├── components/
 │   ├── forecast/
