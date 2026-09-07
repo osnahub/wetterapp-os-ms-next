@@ -449,8 +449,60 @@ a:focus-visible,
   box-shadow: 0 4px 12px #020a1f33;
 }
 
+.segmented-location-nav,
 .quick-location-card {
   margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.segmented-location-control {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 3px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.segmented-location-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.segmented-location-btn:hover:not(.is-active) {
+  color: var(--text-primary);
+  background: var(--surface-chip);
+}
+
+.segmented-location-btn.is-active {
+  background: var(--surface-card-emphasized);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.segmented-active-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-strong);
+  flex-shrink: 0;
 }
 
 .quick-location-list {
@@ -1186,12 +1238,52 @@ a:focus-visible,
 }
 
 .bento-hourly-section .hourly-card h2 {
-  margin: 0 0 12px;
+  margin: 0;
   font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.hourly-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.hourly-nav-controls {
+  display: none;
+  gap: 6px;
+}
+
+@media (min-width: 768px) {
+  .hourly-nav-controls {
+    display: flex;
+  }
+}
+
+.hourly-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.hourly-nav-btn:hover {
+  background: var(--surface-chip);
+  color: var(--text-primary);
+  border-color: var(--accent-strong);
+  transform: scale(1.05);
 }
 
 .bento-hourly-section .hour {
@@ -1213,23 +1305,34 @@ a:focus-visible,
   width: 100%;
 }
 
+.bento-grid-item {
+  min-width: 0;
+  width: 100%;
+}
+
 @media (min-width: 860px) {
   .bento-columns-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+    grid-template-areas:
+      "trend metrics"
+      "activities metrics";
     gap: 20px;
     align-items: start;
     width: 100%;
   }
-}
 
-.bento-left-column,
-.bento-right-column {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
+  .bento-trend-item {
+    grid-area: trend;
+  }
+
+  .bento-activities-item {
+    grid-area: activities;
+  }
+
+  .bento-metrics-item {
+    grid-area: metrics;
+  }
 }
 
 /* ==========================================================================
@@ -1389,6 +1492,24 @@ a:focus-visible,
   color: rgba(255, 255, 255, 0.92);
 }
 
+.bento-hero-summary-badge {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 10px 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.bento-hero-summary-text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: #ffffff;
+  font-weight: 550;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
 .bento-hero-footer {
   display: flex;
   gap: 32px;
@@ -1520,6 +1641,18 @@ a:focus-visible,
 
 .uv-track {
   background: linear-gradient(90deg, #4ade80 0%, #facc15 35%, #fb923c 65%, #f87171 85%, #c084fc 100%);
+}
+
+.aqi-track {
+  background: linear-gradient(
+    90deg,
+    var(--aqi-good) 0%,
+    var(--aqi-fair) 20%,
+    var(--aqi-moderate) 40%,
+    var(--aqi-poor) 60%,
+    var(--aqi-very-poor) 80%,
+    var(--aqi-extremely-poor) 100%
+  );
 }
 
 .bento-progress-pin {
@@ -1861,6 +1994,41 @@ a:focus-visible,
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.activity-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -4px 0 2px 0;
+}
+
+.activity-filter-pill {
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.activity-filter-pill:hover:not(.is-active) {
+  background: var(--surface-chip);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+.activity-filter-pill.is-active {
+  background: var(--accent-strong);
+  color: #ffffff;
+  border-color: var(--accent-strong);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 .activity-list {

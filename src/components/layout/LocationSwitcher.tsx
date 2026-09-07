@@ -15,32 +15,30 @@ export function LocationSwitcher({
   onSelect,
 }: LocationSwitcherProps) {
   return (
-    <div className="quick-location-card">
-      <div className="quick-location-list" role="group" aria-label="Ort auswählen">
+    <nav className="segmented-location-nav" aria-label="Standortauswahl">
+      <div className="segmented-location-control" role="group" aria-label="Ort auswählen">
         {locations.map((loc) => {
           const isActive = loc.id === activeLocation.id;
           const fullLabel = [loc.name, loc.admin1].filter(Boolean).join(', ');
-          const ariaLabel = `${fullLabel}${isActive ? ', aktuell aktiv' : ', als aktiven Ort auswählen'}`;
+          const ariaLabel = `${fullLabel}${isActive ? ', aktuell ausgewählt' : ', als aktiven Standort auswählen'}`;
 
           return (
             <button
               key={loc.id}
-              className="quick-location-chip"
+              className={`segmented-location-btn ${isActive ? 'is-active' : ''}`}
               type="button"
               aria-pressed={isActive}
               aria-label={ariaLabel}
               onClick={() => onSelect(loc)}
             >
               {isActive && (
-                <span className="quick-location-check" aria-hidden="true">
-                  ✓
-                </span>
+                <span className="segmented-active-dot" aria-hidden="true" />
               )}
-              <span>{loc.name}</span>
+              <span className="segmented-label">{loc.name}</span>
             </button>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 }

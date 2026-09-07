@@ -66,7 +66,8 @@ src/
 │       ├── activities.ts         # Bewertungslogik für lokale Aktivitäten
 │       ├── constants.ts          # Standorte, WMO-Tabellen & AQI-Einstufungen
 │       ├── formatters.ts         # Deutsche Zahlen- & Datumsformatierer
-│       └── service.ts            # Datenbeschaffung & Normalisierungsschicht
+│       ├── service.ts            # Datenbeschaffung & Normalisierungsschicht
+│       └── storytelling.ts       # Menschlich formuliertes Tageswetter-Resümee
 └── types/
     └── weather.ts                # Interne Domänen-Typdefinitionen
 ```

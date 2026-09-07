@@ -1,14 +1,16 @@
 'use client';
 
 import React from 'react';
-import { CurrentWeather, WeatherLocation } from '@/types/weather';
+import { CurrentWeather, DailyForecastItem, WeatherLocation } from '@/types/weather';
 import { WeatherIcon } from '../weather/WeatherGlyph';
 import { formatTemperature, formatTime } from '@/lib/weather/formatters';
+import { generateWeatherSummary } from '@/lib/weather/storytelling';
 
 interface BentoHeroCardProps {
   current: CurrentWeather;
   location: WeatherLocation;
   fetchedAt: string;
+  todayDaily?: DailyForecastItem;
   onRefresh?: () => void;
   isRefreshing?: boolean;
 }
@@ -17,6 +19,7 @@ export function BentoHeroCard({
   current,
   location,
   fetchedAt,
+  todayDaily,
   onRefresh,
   isRefreshing = false,
 }: BentoHeroCardProps) {
@@ -29,6 +32,7 @@ export function BentoHeroCard({
   }).format(new Date(fetchedAt));
 
   const formattedTime = formatTime(fetchedAt, location.timezone);
+  const weatherSummary = generateWeatherSummary(current, todayDaily);
 
   return (
     <div className="bento-hero-wrapper">
@@ -109,6 +113,12 @@ export function BentoHeroCard({
             <span className="bento-hero-condition">{current.condition.label}</span>
           </div>
         </div>
+
+        {weatherSummary && (
+          <div className="bento-hero-summary-badge">
+            <p className="bento-hero-summary-text">{weatherSummary}</p>
+          </div>
+        )}
 
         <div className="bento-hero-footer">
           <div>

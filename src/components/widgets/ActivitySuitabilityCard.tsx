@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { ActivityRecommendation } from '@/types/weather';
 
 interface ActivitySuitabilityCardProps {
@@ -88,6 +90,19 @@ export function ActivitySuitabilityCard({
   recommendations,
   locationName,
 }: ActivitySuitabilityCardProps) {
+  const [filter, setFilter] = useState<'all' | 'outdoor' | 'indoor'>('all');
+
+  const filtered = recommendations.filter((item) => {
+    if (filter === 'all') return true;
+    if (filter === 'outdoor') {
+      return item.id === 'market' || item.id === 'lake' || item.id === 'zoo';
+    }
+    if (filter === 'indoor') {
+      return item.id === 'museum' || item.id === 'umbrella' || item.id === 'zoo';
+    }
+    return true;
+  });
+
   return (
     <section className="bento-card activity-card">
       <div className="bento-card-header">
@@ -95,8 +110,32 @@ export function ActivitySuitabilityCard({
         <span className="bento-subtitle-badge">{locationName}</span>
       </div>
 
+      <div className="activity-filter-bar" role="group" aria-label="Aktivitäten nach Kategorie filtern">
+        <button
+          type="button"
+          className={`activity-filter-pill ${filter === 'all' ? 'is-active' : ''}`}
+          onClick={() => setFilter('all')}
+        >
+          Alle ({recommendations.length})
+        </button>
+        <button
+          type="button"
+          className={`activity-filter-pill ${filter === 'outdoor' ? 'is-active' : ''}`}
+          onClick={() => setFilter('outdoor')}
+        >
+          Draußen
+        </button>
+        <button
+          type="button"
+          className={`activity-filter-pill ${filter === 'indoor' ? 'is-active' : ''}`}
+          onClick={() => setFilter('indoor')}
+        >
+          Überdacht & Kultur
+        </button>
+      </div>
+
       <ul className="activity-list" role="list">
-        {recommendations.map((item) => (
+        {filtered.map((item) => (
           <li key={item.id} className="activity-item">
             <div className="activity-icon-box">
               <ActivityIcon type={item.iconType} />
